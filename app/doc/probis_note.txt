@@ -1,0 +1,8 @@
+
+
+
+Penghitungan Margin :
+misal harga sawit 1000 Rupiah dan pelanggan jual 1600 Kg
+margin 5%
+
+Harga akhir = (1000 ( 5% * 1000 )) * 1600 =
