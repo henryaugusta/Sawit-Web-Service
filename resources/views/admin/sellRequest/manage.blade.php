@@ -1,24 +1,61 @@
 @extends('layouts.template')
 
-@section('head')
-    <style>
-        .select2 {
-            width: 100% !important;
-        }
-    </style>
+@section('header')
+    <!--Leaflet JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
 @endsection
 
 @section('script')
 
-    <script>
-        // This will create a single gallery from all elements that have class "gallery-item"
-
-    </script>
-
 
 
     <script>
+        let sLat = -7.046379;
+        let sLong = 107.555881;
         $(document).ready(function () {
+
+            $('#exampleModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                lat = button.data('lat') // Extract info from data-* attributes
+                long = button.data('long') // Extract info from data-* attributes
+                sLat = button.data('lat');
+                sLong = button.data('long');
+
+                var mymap = L.map('mapid').setView([sLat, sLong], 23);
+                var popup = L.popup();
+                let myMarker = L.marker([sLat, sLong]).addTo(mymap)
+                    .bindPopup("Silakan Pindahkan Pin Ini Ke Lokasi Anda.").openPopup();
+                myMarker.addTo(mymap);
+
+                L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaGVucnlhdWd1c3RhIiwiYSI6ImNra2pjaDAxcDAyYngydnF0dnppZzByZzgifQ.UKzJXFzQPNIzrri9UrALxQ', {
+                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                    maxZoom: 18,
+                    id: 'mapbox/streets-v11',
+                    tileSize: 512,
+                    zoomOffset: -1,
+                    accessToken: 'your.mapbox.access.token'
+                }).addTo(mymap);
+
+                L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaGVucnlhdWd1c3RhIiwiYSI6ImNra2pjaDAxcDAyYngydnF0dnppZzByZzgifQ.UKzJXFzQPNIzrri9UrALxQ', {
+                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                    maxZoom: 18,
+                    id: 'mapbox/streets-v11',
+                    tileSize: 512,
+                    zoomOffset: -1,
+                    accessToken: 'your.mapbox.access.token'
+                }).addTo(mymap);
+
+                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                var modal = $(this)
+                modal.find('#s-coordinate').text('Latitude : ' + lat + " - Longitude : " + long)
+                modal.find('.modal-title').text('Permintaan Jual Sawit')
+            })
 
             $('#datatables').DataTable({
                 initComplete: function () {
@@ -166,44 +203,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-3">
-                    <div class="card card-stats card-round">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-5">
-                                    <div class="icon-big text-center">
-                                        <i class="flaticon-error text-danger"></i>
-                                    </div>
-                                </div>
-                                <div class="col-7 col-stats">
-                                    <div class="numbers">
-                                        <p class="card-category">Sedang Diproses</p>
-                                        <h4 class="card-title">99</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <div class="card card-stats card-round">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-5">
-                                    <div class="icon-big text-center">
-                                        <i class="flaticon-error text-danger"></i>
-                                    </div>
-                                </div>
-                                <div class="col-7 col-stats">
-                                    <div class="numbers">
-                                        <p class="card-category">Sedang Diproses</p>
-                                        <h4 class="card-title">99</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="col-sm-6 col-md-3">
                     <div class="card card-stats card-round">
                         <div class="card-body">
@@ -266,25 +266,18 @@
                 @endif
             </div>
 
-
-        </div>
-
-        <div class="container">
-
-
-            <div class="card border-0 shadow rounded">
+            <div class=" col-md-12 card border-0 shadow rounded">
                 <div class="card-body">
-                    <h4 class="card-title">Daftar Request Jual</h4>
+                    <h4 class="card-title">Daftar Request Jual Saya</h4>
                     <table id="datatables" class="table table-responsive">
                         <thead class="thead-inverse">
                         <tr>
                             <th>No</th>
                             <th>Estimasi Berat</th>
                             <th>Status</th>
-                            <th>Contact</th>
-                            <th>Email</th>
-                            <th>Tanggal Lahir</th>
-                            <th>Foto</th>
+                            <th>Alamat Lengkap</th>
+                            <th>Kontak</th>
+                            <th>Pinpoin</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -292,7 +285,6 @@
                             @php
                                 $statusDB = $item->status;
                                 $status="";
-
                             @endphp
 
                             <tr>
@@ -315,6 +307,14 @@
                                         <span class="badge badge-warning">{{Dibatalkan}}</span>
                                     @endif
                                 </td>
+                                <td>{{$item->address}}</td>
+                                <td>{{$item->contact}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#exampleModal" data-lat="{{$item->lat}}"
+                                            data-long="{{$item->long}}" data-whatever="{{$item->long}}">Lihat Pin Poin
+                                    </button>
+                                </td>
 
                             </tr>
                         @empty
@@ -327,6 +327,29 @@
                         @endforelse
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade bd-example-modal-xl" id="exampleModal"
+             tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="s-coordinate">Latitude : </p>
+                        <div id="mapid" style="width: 100%; height: 400px;"></div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Send message</button>
+                    </div>
                 </div>
             </div>
         </div>

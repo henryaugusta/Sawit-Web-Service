@@ -33,7 +33,6 @@
                 sessionStorage.fonts = true;
             }
         });
-
     </script>
 
     @yield('header')
