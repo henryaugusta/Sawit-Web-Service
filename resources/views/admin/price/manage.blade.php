@@ -42,8 +42,6 @@
 
 @section('main')
 
-
-
     <div class="container">
         <div class="panel-header">
             <div class="page-inner border-bottom pb-0 mb-3">
@@ -57,55 +55,11 @@
                 </div>
             </div>
         </div>
-        <div class="page-inner">
-            @if ($errors->any())
 
-                <div class="alert alert-primary alert-dismissible fade show mx-2 my-2" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                    @foreach ($errors->all() as $error)
-                        <script>
-                            //message with toastr
-                            @if(session()-> has('success'))
-                            toastr.success('{{ session('success') }}', 'BERHASIL!');
-                            @elseif(session()-> has('error'))
-                            toastr.error('{{ session('error') }}', 'GAGAL!');
-                            @endif
-                        </script>
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </div>
-
-            @endif
-            <div>
-
-                @if(session() -> has('success'))
-                    <div class="alert alert-primary alert-dismissible fade show mx-2 my-2" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            <span class="sr-only">Close</span>
-                        </button>
-                        <strong>{{Session::get( 'success' )}}</strong>
-                    </div>
-
-                @elseif(session() -> has('error'))
-
-                    <div class="alert alert-primary alert-dismissible fade show mx-2 my-2" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            <span class="sr-only">Close</span>
-                        </button>
-                        <strong>{{Session::get( 'error' )}}</strong>
-                    </div>
-
-                @endif
-            </div>
-        </div>
+        @include('layouts.error')
 
         <div class="container">
-            <div class="container row">
+            <div class="row">
                 <div class="col-sm-6 col-md-3">
                     <div class="card card-stats card-round">
                         <div class="card-body">
@@ -165,52 +119,48 @@
                 </div>
             </div>
 
-            <div class=" container row">
-                <div class="card border-2 shadow rounded col-md-12 col-12">
-                    <div class="card-body">
-                        <h4 class="card-title">Simulasi</h4>
-                        <label for="">Estimasi Berat Total Sawit : </label>
-                        <input type="text" placeholder="Masukkan Berat Sawit"
-                               class="form-control" name="" id="priceSim" aria-describedby="helpId">
-                        <small id="helpId" class="form-text text-muted">Masukkan Perkiraan Berat
-                            Sawit</small>
-                        <ul>
-                            <li><strong>Harga Aktif : Rp. {{$latestPrice}} </strong></li>
-                            <li><strong>Margin : {{$latestMargin*100}} %</strong></li>
-                            <li><strong>Berat Bersih : </strong> <span id="nettWeight"> </span></li>
-                            <li><strong>Harga Jual : <span id="sellPrice"> </span></strong></li>
-                        </ul>
-                    </div>
+            <div class="card border-2 shadow rounded col-md-12 col-12">
+                <div class="card-body">
+                    <h4 class="card-title">Simulasi</h4>
+                    <label for="">Estimasi Berat Total Sawit : </label>
+                    <input type="text" placeholder="Masukkan Berat Sawit"
+                           class="form-control" name="" id="priceSim" aria-describedby="helpId">
+                    <small id="helpId" class="form-text text-muted">Masukkan Perkiraan Berat
+                        Sawit</small>
+                    <ul>
+                        <li><strong>Harga Aktif : Rp. {{$latestPrice}} </strong></li>
+                        <li><strong>Margin : {{$latestMargin*100}} %</strong></li>
+                        <li><strong>Berat Bersih : </strong> <span id="nettWeight"> </span></li>
+                        <li><strong>Harga Jual : <span id="sellPrice"> </span></strong></li>
+                    </ul>
                 </div>
+            </div>
 
-                <div class="col-md-12 col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-head-row">
-                                <div class="card-title">Grafik Harga</div>
-                                <div class="card-tools">
-                                    <a href="#" class="btn btn-info btn-border btn-round btn-sm mr-2">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-head-row">
+                        <div class="card-title">Grafik Harga</div>
+                        <div class="card-tools">
+                            <a href="#" class="btn btn-info btn-border btn-round btn-sm mr-2">
 												<span class="btn-label">
 													<i class="fa fa-pencil"></i>
 												</span>
-                                        Export
-                                    </a>
-                                    <a href="#" class="btn btn-info btn-border btn-round btn-sm">
+                                Export
+                            </a>
+                            <a href="#" class="btn btn-info btn-border btn-round btn-sm">
 												<span class="btn-label">
 													<i class="fa fa-print"></i>
 												</span>
-                                        Print
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="chart-container" style="min-height: 375px">
-                                <canvas id="statisticsChart"></canvas>
-                            </div>
-                            <div id="myChartLegend"></div>
+                                Print
+                            </a>
                         </div>
                     </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container" style="min-height: 375px">
+                        <canvas id="statisticsChart"></canvas>
+                    </div>
+                    <div id="myChartLegend"></div>
                 </div>
             </div>
 
@@ -275,166 +225,167 @@
 
                 </div>
             </div>
+        </div>
 
 
-            <script>
-                //message with toastr
-                @if(session()-> has('success'))
-                toastr.success('{{ session('success') }}', 'BERHASIL!');
-                @elseif(session()-> has('error'))
-                toastr.error('{{ session('error') }}', 'GAGAL!');
-                @endif
-            </script>
+        <script>
+            //message with toastr
+            @if(session()-> has('success'))
+            toastr.success('{{ session('success') }}', 'BERHASIL!');
+            @elseif(session()-> has('error'))
+            toastr.error('{{ session('error') }}', 'GAGAL!');
+            @endif
+        </script>
 
 
-            <!-- Modal Add Request Sell-->
-            <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
-                 aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Tambah Harga Baru</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
+        <!-- Modal Add Request Sell-->
+        <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Tambah Harga Baru</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
 
-                            <form method="post" action="{{url('admin/price/store')}}">
-                                @method('POST')
-                                @csrf
-                                <input type="hidden" name="redirectTo" value="/admin/price/manage">
-                                <div class="form-group">
-                                    <label for="">Harga Sawit</label>
-                                    <input type="number" class="form-control @error('price') is-invalid @enderror"
-                                           name="price" id="" aria-describedby="helpId" placeholder="Harga Sawit">
-                                    <small id="helpId" class="form-text text-muted">Harga Jual Sawit Mentah per
-                                        Kg</small>
-                                </div>
+                        <form method="post" action="{{url('admin/price/store')}}">
+                            @method('POST')
+                            @csrf
+                            <input type="hidden" name="redirectTo" value="/admin/price/manage">
+                            <div class="form-group">
+                                <label for="">Harga Sawit</label>
+                                <input type="number" class="form-control @error('price') is-invalid @enderror"
+                                       name="price" id="" aria-describedby="helpId" placeholder="Harga Sawit">
+                                <small id="helpId" class="form-text text-muted">Harga Jual Sawit Mentah per
+                                    Kg</small>
+                            </div>
 
-                                <div class="form-group">
-                                    <label for="">Margin Penjualan</label>
-                                    <input type="number" step=".01"
-                                           class="form-control @error('margin') is-invalid @enderror"
-                                           name="margin" id="" aria-describedby="helpId" placeholder="Margin Jual">
-                                    <small id="helpId" class="form-text text-muted">Margin Penjualan Dalam
-                                        Persen</small>
-                                </div>
+                            <div class="form-group">
+                                <label for="">Margin Penjualan</label>
+                                <input type="number" step=".01"
+                                       class="form-control @error('margin') is-invalid @enderror"
+                                       name="margin" id="" aria-describedby="helpId" placeholder="Margin Jual">
+                                <small id="helpId" class="form-text text-muted">Margin Penjualan Dalam
+                                    Persen</small>
+                            </div>
 
-                                <button type="submit" class="btn btn-primary">Tambahkan Harga</button>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Tambahkan Harga</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
 
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Chart JS -->
-            <script src="{{ asset('main_asset/examples') }}/assets/js/plugin/chart.js/chart.min.js"></script>
-            <script>
+        <!-- Chart JS -->
+        <script src="{{ asset('main_asset/examples') }}/assets/js/plugin/chart.js/chart.min.js"></script>
+        <script>
 
-                "use strict";
-                var ctx = document.getElementById('statisticsChart').getContext('2d');
+            "use strict";
+            var ctx = document.getElementById('statisticsChart').getContext('2d');
 
-                var statisticsChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: [
-                            @forelse($data as $item)
+            var statisticsChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [
+                        @forelse($data as $item)
                             "{{date('d-m-Y', strtotime($item->created_at))}}",
+                        @empty
+                        @endforelse
+                    ],
+                    datasets: [{
+                        label: "Harga Sawit",
+                        borderColor: '#f3545d',
+                        pointBackgroundColor: 'rgba(243, 84, 93, 0.6)',
+                        pointRadius: 0,
+                        backgroundColor: 'rgba(243, 84, 93, 0.4)',
+                        legendColor: '#f3545d',
+                        fill: false,
+                        borderWidth: 2,
+                        data: [
+                            @forelse($data as $item)
+                                "{{$item->price}}",
                             @empty
                             @endforelse
-                        ],
-                        datasets: [{
-                            label: "Harga Sawit",
-                            borderColor: '#f3545d',
-                            pointBackgroundColor: 'rgba(243, 84, 93, 0.6)',
-                            pointRadius: 0,
-                            backgroundColor: 'rgba(243, 84, 93, 0.4)',
-                            legendColor: '#f3545d',
-                            fill: false,
-                            borderWidth: 2,
-                            data: [
-                                @forelse($data as $item)
-                                    "{{$item->price}}",
-                                @empty
-                                @endforelse
-                            ]
-                        }, {
-                            label: "Margin",
-                            borderColor: '#fdaf4b',
-                            pointBackgroundColor: 'rgba(253, 175, 75, 0.6)',
-                            pointRadius: 0,
-                            backgroundColor: 'rgba(253, 175, 75, 0.4)',
-                            legendColor: '#fdaf4b',
-                            fill: true,
-                            borderWidth: 2,
-                            data: [
-                                @forelse($data as $item)
-                                    "{{$item->margin*100}}",
-                                @empty
-                                @endforelse
-                            ]
-                        }, ]
+                        ]
+                    }, {
+                        label: "Margin",
+                        borderColor: '#fdaf4b',
+                        pointBackgroundColor: 'rgba(253, 175, 75, 0.6)',
+                        pointRadius: 0,
+                        backgroundColor: 'rgba(253, 175, 75, 0.4)',
+                        legendColor: '#fdaf4b',
+                        fill: true,
+                        borderWidth: 2,
+                        data: [
+                            @forelse($data as $item)
+                                "{{$item->margin*100}}",
+                            @empty
+                            @endforelse
+                        ]
+                    },]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
                     },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        legend: {
-                            display: false
-                        },
-                        tooltips: {
-                            bodySpacing: 4,
-                            mode: "nearest",
-                            intersect: 0,
-                            position: "nearest",
-                            xPadding: 10,
-                            yPadding: 10,
-                            caretPadding: 10
-                        },
-                        layout: {
-                            padding: {left: 5, right: 5, top: 15, bottom: 15}
-                        },
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    fontStyle: "500",
-                                    beginAtZero: false,
-                                    maxTicksLimit: 5,
-                                    padding: 10
-                                },
-                                gridLines: {
-                                    drawTicks: false,
-                                    display: false
-                                }
-                            }],
-                            xAxes: [{
-                                gridLines: {
-                                    zeroLineColor: "transparent"
-                                },
-                                ticks: {
-                                    padding: 10,
-                                    fontStyle: "500"
-                                }
-                            }]
-                        },
-                        legendCallback: function (chart) {
-                            var text = [];
-                            text.push('<ul class="' + chart.id + '-legend html-legend">');
-                            for (var i = 0; i < chart.data.datasets.length; i++) {
-                                text.push('<li><span style="background-color:' + chart.data.datasets[i].legendColor + '"></span>');
-                                if (chart.data.datasets[i].label) {
-                                    text.push(chart.data.datasets[i].label);
-                                }
-                                text.push('</li>');
+                    tooltips: {
+                        bodySpacing: 4,
+                        mode: "nearest",
+                        intersect: 0,
+                        position: "nearest",
+                        xPadding: 10,
+                        yPadding: 10,
+                        caretPadding: 10
+                    },
+                    layout: {
+                        padding: {left: 5, right: 5, top: 15, bottom: 15}
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                fontStyle: "500",
+                                beginAtZero: false,
+                                maxTicksLimit: 5,
+                                padding: 10
+                            },
+                            gridLines: {
+                                drawTicks: false,
+                                display: false
                             }
-                            text.push('</ul>');
-                            return text.join('');
+                        }],
+                        xAxes: [{
+                            gridLines: {
+                                zeroLineColor: "transparent"
+                            },
+                            ticks: {
+                                padding: 10,
+                                fontStyle: "500"
+                            }
+                        }]
+                    },
+                    legendCallback: function (chart) {
+                        var text = [];
+                        text.push('<ul class="' + chart.id + '-legend html-legend">');
+                        for (var i = 0; i < chart.data.datasets.length; i++) {
+                            text.push('<li><span style="background-color:' + chart.data.datasets[i].legendColor + '"></span>');
+                            if (chart.data.datasets[i].label) {
+                                text.push(chart.data.datasets[i].label);
+                            }
+                            text.push('</li>');
                         }
+                        text.push('</ul>');
+                        return text.join('');
                     }
-                });
-            </script>
-
+                }
+            });
+        </script>
+    </div>
 @endsection

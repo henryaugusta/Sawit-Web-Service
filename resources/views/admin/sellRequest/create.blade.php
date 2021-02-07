@@ -106,127 +106,104 @@
         @csrf
         <div class="panel-header">
             <div class="page-inner border-bottom pb-0 mb-3">
-                <div class="d-flex align-items-left flex-column">
-                    <h4 class="card-title">Request Penjualan Masuk</h4>
-                    <div class="nav-scroller d-flex">
-                        <div class="nav nav-line nav-color-info d-flex align-items-center justify-contents-center">
-                            <a class="nav-link active" href="#">Request Penjualan</a>
-                        </div>
-                    </div>
+                <div class="page-header">
+                    <h4 class="page-title">Dashboard</h4>
+                    <ul class="breadcrumbs">
+                        <li class="nav-home">
+                            <a href="#">
+                                <i class="flaticon-home"></i>
+                            </a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Pages</a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Starter Page</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <div class="page-inner">
-            @if ($errors->any())
-
-                <div class="alert alert-primary alert-dismissible fade show mx-2 my-2" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                    @foreach ($errors->all() as $error)
-                        <script>
-                            toastr.error('{{ session('success') }}', '{{ session('error ') }}');
-                        </script>
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </div>
-
-            @endif
-            <div>
-                @if(session() -> has('success'))
-                    <div class="alert alert-primary alert-dismissible fade show mx-2 my-2" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            <span class="sr-only">Close</span>
-                        </button>
-                        <strong>{{Session::get( 'success' )}}</strong>
-                    </div>
-
-                @elseif(session() -> has('error'))
-
-                    <div class="alert alert-primary alert-dismissible fade show mx-2 my-2" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            <span class="sr-only">Close</span>
-                        </button>
-                        <strong>{{Session::get( 'error' )}}</strong>
-                    </div>
-
-                @endif
+        <div class="page-inner row">
+            <div class="col-12">
+                @include('layouts.error')
             </div>
 
-            <div class=" container row">
-                <div class="col-sm-6 col-md-6">
-                    <div class="card card-stats card-round">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-icon">
-                                    <div class="icon-big text-center icon-success bubble-shadow-small">
-                                        <i class="flaticon-graph"></i>
-                                    </div>
+            <div class="col-sm-6 col-md-6">
+                <div class="card card-stats card-round">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-icon">
+                                <div class="icon-big text-center icon-success bubble-shadow-small">
+                                    <i class="flaticon-graph"></i>
                                 </div>
-                                <div class="col col-stats ml-3 ml-sm-0">
-                                    <div class="numbers">
-                                        <p class="card-category">Harga <br> Saat Ini</p>
-                                        <h4 class="card-title">{{$latestPrice}}</h4>
-                                    </div>
+                            </div>
+                            <div class="col col-stats ml-3 ml-sm-0">
+                                <div class="numbers">
+                                    <p class="card-category">Harga <br> Saat Ini</p>
+                                    <h4 class="card-title">{{$latestPrice}}</h4>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-6">
-                    <div class="card card-stats card-round">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-icon">
-                                    <div class="icon-big text-center icon-success bubble-shadow-small">
-                                        <i class="flaticon-graph"></i>
-                                    </div>
+            </div>
+            <div class="col-sm-6 col-md-6">
+                <div class="card card-stats card-round">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-icon">
+                                <div class="icon-big text-center icon-success bubble-shadow-small">
+                                    <i class="flaticon-graph"></i>
                                 </div>
-                                <div class="col col-stats ml-3 ml-sm-0">
-                                    <div class="numbers">
-                                        <p class="card-category">Margin <br> Saat Ini</p>
-                                        <h4 class="card-title">{{$latestMargin*100}}%</h4>
-                                    </div>
+                            </div>
+                            <div class="col col-stats ml-3 ml-sm-0">
+                                <div class="numbers">
+                                    <p class="card-category">Margin <br> Saat Ini</p>
+                                    <h4 class="card-title">{{$latestMargin*100}}%</h4>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-head-row">
-                                <div class="card-title">Grafik Harga</div>
-                                <div class="card-tools">
-                                    <a href="#" class="btn btn-info btn-border btn-round btn-sm mr-2">
+            </div>
+            <div class="col-md-12 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-head-row">
+                            <div class="card-title">Grafik Harga</div>
+                            <div class="card-tools">
+                                <a href="#" class="btn btn-info btn-border btn-round btn-sm mr-2">
 												<span class="btn-label">
 													<i class="fa fa-pencil"></i>
 												</span>
-                                        Export
-                                    </a>
-                                    <a href="#" class="btn btn-info btn-border btn-round btn-sm">
+                                    Export
+                                </a>
+                                <a href="#" class="btn btn-info btn-border btn-round btn-sm">
 												<span class="btn-label">
 													<i class="fa fa-print"></i>
 												</span>
-                                        Print
-                                    </a>
-                                </div>
+                                    Print
+                                </a>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="chart-container" style="min-height: 375px">
-                                <canvas id="statisticsChart"></canvas>
-                            </div>
-                            <div id="myChartLegend"></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container" style="min-height: 375px">
+                            <canvas id="statisticsChart"></canvas>
                         </div>
+                        <div id="myChartLegend"></div>
                     </div>
                 </div>
             </div>
 
-            <div class="card border-0 shadow rounded">
+            <div class="card border-0 shadow rounded col-12">
                 <div class="card-body">
                     <h4 class="card-title">Info Pelanggan</h4>
                     @csrf
@@ -390,119 +367,121 @@
                 </div>
             </div>
 
-        <script>
-            //message with toastr
-            @if(session()-> has('success'))
-            toastr.success('{{ session('success') }}', 'BERHASIL!');
-            @elseif(session()-> has('error'))
-            toastr.error('{{ session('error') }}', 'GAGAL!');
-            @endif
-        </script>
+            <script>
+                //message with toastr
+                @if(session()-> has('success'))
+                toastr.success('{{ session('success') }}', 'BERHASIL!');
+                @elseif(session()-> has('error'))
+                toastr.error('{{ session('error') }}', 'GAGAL!');
+                @endif
+            </script>
 
-        <!-- Chart JS -->
-        <script src="{{ asset('main_asset/examples') }}/assets/js/plugin/chart.js/chart.min.js"></script>
-        <script>
+            <!-- Chart JS -->
+            <script src="{{ asset('main_asset/examples') }}/assets/js/plugin/chart.js/chart.min.js"></script>
+            <script>
 
-            "use strict";
-            var ctx = document.getElementById('statisticsChart').getContext('2d');
+                "use strict";
+                var ctx = document.getElementById('statisticsChart').getContext('2d');
 
-            var statisticsChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: [
-                        @forelse($data as $item)
-                            "{{date('d-m-Y', strtotime($item->created_at))}}",
-                        @empty
-                        @endforelse
-                    ],
-                    datasets: [{
-                        label: "Harga Sawit",
-                        borderColor: '#f3545d',
-                        pointBackgroundColor: 'rgba(243, 84, 93, 0.6)',
-                        pointRadius: 0,
-                        backgroundColor: 'rgba(243, 84, 93, 0.4)',
-                        legendColor: '#f3545d',
-                        fill: false,
-                        borderWidth: 2,
-                        data: [
+                var statisticsChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [
                             @forelse($data as $item)
-                                "{{$item->price}}",
+                                "{{date('d-m-Y', strtotime($item->created_at))}}",
                             @empty
                             @endforelse
-                        ]
-                    }, {
-                        label: "Margin",
-                        borderColor: '#fdaf4b',
-                        pointBackgroundColor: 'rgba(253, 175, 75, 0.6)',
-                        pointRadius: 0,
-                        backgroundColor: 'rgba(253, 175, 75, 0.4)',
-                        legendColor: '#fdaf4b',
-                        fill: true,
-                        borderWidth: 2,
-                        data: [
-                            @forelse($data as $item)
-                                "{{$item->margin*100}}",
-                            @empty
-                            @endforelse
-                        ]
-                    },]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    legend: {
-                        display: false
+                        ],
+                        datasets: [{
+                            label: "Harga Sawit",
+                            borderColor: '#f3545d',
+                            pointBackgroundColor: 'rgba(243, 84, 93, 0.6)',
+                            pointRadius: 0,
+                            backgroundColor: 'rgba(243, 84, 93, 0.4)',
+                            legendColor: '#f3545d',
+                            fill: false,
+                            borderWidth: 2,
+                            data: [
+                                @forelse($data as $item)
+                                    "{{$item->price}}",
+                                @empty
+                                @endforelse
+                            ]
+                        }, {
+                            label: "Margin",
+                            borderColor: '#fdaf4b',
+                            pointBackgroundColor: 'rgba(253, 175, 75, 0.6)',
+                            pointRadius: 0,
+                            backgroundColor: 'rgba(253, 175, 75, 0.4)',
+                            legendColor: '#fdaf4b',
+                            fill: true,
+                            borderWidth: 2,
+                            data: [
+                                @forelse($data as $item)
+                                    "{{$item->margin*100}}",
+                                @empty
+                                @endforelse
+                            ]
+                        },]
                     },
-                    tooltips: {
-                        bodySpacing: 4,
-                        mode: "nearest",
-                        intersect: 0,
-                        position: "nearest",
-                        xPadding: 10,
-                        yPadding: 10,
-                        caretPadding: 10
-                    },
-                    layout: {
-                        padding: {left: 5, right: 5, top: 15, bottom: 15}
-                    },
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                fontStyle: "500",
-                                beginAtZero: false,
-                                maxTicksLimit: 5,
-                                padding: 10
-                            },
-                            gridLines: {
-                                drawTicks: false,
-                                display: false
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: {
+                            display: false
+                        },
+                        tooltips: {
+                            bodySpacing: 4,
+                            mode: "nearest",
+                            intersect: 0,
+                            position: "nearest",
+                            xPadding: 10,
+                            yPadding: 10,
+                            caretPadding: 10
+                        },
+                        layout: {
+                            padding: {left: 5, right: 5, top: 15, bottom: 15}
+                        },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    fontStyle: "500",
+                                    beginAtZero: false,
+                                    maxTicksLimit: 5,
+                                    padding: 10
+                                },
+                                gridLines: {
+                                    drawTicks: false,
+                                    display: false
+                                }
+                            }],
+                            xAxes: [{
+                                gridLines: {
+                                    zeroLineColor: "transparent"
+                                },
+                                ticks: {
+                                    padding: 10,
+                                    fontStyle: "500"
+                                }
+                            }]
+                        },
+                        legendCallback: function (chart) {
+                            var text = [];
+                            text.push('<ul class="' + chart.id + '-legend html-legend">');
+                            for (var i = 0; i < chart.data.datasets.length; i++) {
+                                text.push('<li><span style="background-color:' + chart.data.datasets[i].legendColor + '"></span>');
+                                if (chart.data.datasets[i].label) {
+                                    text.push(chart.data.datasets[i].label);
+                                }
+                                text.push('</li>');
                             }
-                        }],
-                        xAxes: [{
-                            gridLines: {
-                                zeroLineColor: "transparent"
-                            },
-                            ticks: {
-                                padding: 10,
-                                fontStyle: "500"
-                            }
-                        }]
-                    },
-                    legendCallback: function (chart) {
-                        var text = [];
-                        text.push('<ul class="' + chart.id + '-legend html-legend">');
-                        for (var i = 0; i < chart.data.datasets.length; i++) {
-                            text.push('<li><span style="background-color:' + chart.data.datasets[i].legendColor + '"></span>');
-                            if (chart.data.datasets[i].label) {
-                                text.push(chart.data.datasets[i].label);
-                            }
-                            text.push('</li>');
+                            text.push('</ul>');
+                            return text.join('');
                         }
-                        text.push('</ul>');
-                        return text.join('');
                     }
-                }
-            });
-        </script>
+                });
+            </script>
+        </div>
     </form>
+
 @endsection

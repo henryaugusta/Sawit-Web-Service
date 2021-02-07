@@ -50,7 +50,6 @@ class RequestSellController extends Controller
      */
     public function store(Request $request)
     {
-
         $rules = [
             'upload_file' => 'required',
             'upload_file.*' => 'mimes:jpeg,png,jpg,gif,svg,png|max:12048',
@@ -113,7 +112,6 @@ class RequestSellController extends Controller
             }
 
         } else {
-
             if (str_contains(url()->current(), 'api/')) {
                 return response()->json([
                     'http_response' => 400,
@@ -124,8 +122,6 @@ class RequestSellController extends Controller
             } else {
                 return redirect("$request->redirectTo")->with(['error' => "Request Jual Berhasil"]);
             }
-
-
         }
     }
 }

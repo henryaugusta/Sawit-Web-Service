@@ -14,6 +14,16 @@ class Helper
 //return $tokenCheck;
 //}
 
+    public static function isAPI()
+    {
+        $url = url()->current();
+        if (str_contains($url, 'api/')){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public static function checkApiKey($key)
     {
         $check = DB::table('api_key')
@@ -28,6 +38,20 @@ class Helper
             ], 401);
         }
         return null;
+    }
+
+    public static function profileImgPath()
+    {
+        return "photo/profile";
+    }
+
+    public static function newsImgPath()
+    {
+        return "photo/news";
+    }
+    public static function reqSellImgPath()
+    {
+        return "photo/profile";
     }
 
 }

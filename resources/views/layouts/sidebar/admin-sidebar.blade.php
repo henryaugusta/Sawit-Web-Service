@@ -58,7 +58,31 @@
                     </span>
                     <h4 class="text-section">Finance</h4>
                 </li>
-                <li class="nav-item {{ (Request::is('admin/sell-request/*')) ? 'active' : ''}}">
+                <li class="nav-item {{ (Request::is('admin/news/*')) ? 'active' : ''}}">
+                    <a data-toggle="collapse" href="#ee-nav">
+                        <i class="fas fa-file-contract"></i>
+                        <p>Manage Berita</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse {{ (Request::is('admin/news/*')) ? 'show' : ''}}" id="ee-nav">
+                        <ul class="nav nav-collapse">
+                            <li  class="{{ (Request::is('admin/news/create')) ? 'active' : ''}}">
+                                <a href="{{url('admin/news/create')}}">
+                                    <span class="sub-item ">
+                                        Buat Berita</span>
+                                </a>
+                            </li>
+                            <li  class="{{ (Request::is('admin/news/index')) ? 'active' : ''}}">
+                                <a href="{{url('admin/news/index')}}">
+                                    <span class="sub-item ">
+                                        Lihat Berita</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item {{ (Request::is('admin/price/manage')) ? 'active' : ''}}">
                     <a data-toggle="collapse" href="#emsadal-nav">
                         <i class="far fa-paper-plane"></i>
                         <p>Permintaan Jual</p>
@@ -81,12 +105,14 @@
                         </ul>
                     </div>
                 </li>
+
                 <li class="nav-item {{ (Request::is('admin/price/manage')) ? 'active' : ''}}">
                     <a href="{{url('admin/price/manage')}}">
                         <i class="fas fa-money-bill-wave"></i>
                         <p>Harga CPO</p>
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a href="starter-template.html">
                         <i class="far fa-file-excel"></i>

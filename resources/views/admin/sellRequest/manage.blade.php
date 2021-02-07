@@ -12,8 +12,6 @@
 
 @section('script')
 
-
-
     <script>
         let sLat = -7.046379;
         let sLong = 107.555881;
@@ -26,7 +24,11 @@
                 sLat = button.data('lat');
                 sLong = button.data('long');
 
-                var mymap = L.map('mapid').setView([sLat, sLong], 23);
+                var mymap = L.map('mapid').setView([sLat, sLong], 2
+                php
+                3
+            )
+                ;
                 var popup = L.popup();
                 let myMarker = L.marker([sLat, sLong]).addTo(mymap)
                     .bindPopup("Silakan Pindahkan Pin Ini Ke Lokasi Anda.").openPopup();
@@ -224,144 +226,109 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="col-12">
+        @include('layouts.error')
+        </div>
 
 
-            @if ($errors->any())
+        <div class=" col-md-12 card border-0 shadow rounded">
+            <div class="card-body">
+                <h4 class="card-title">Daftar Request Jual Saya</h4>
+                <table id="datatables" class="table table-responsive">
+                    <thead class="thead-inverse">
+                    <tr>
+                        <th>No</th>
+                        <th>Estimasi Berat</th>
+                        <th>Status</th>
+                        <th>Alamat Lengkap</th>
+                        <th>Kontak</th>
+                        <th>Pinpoin</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @forelse ($sellRequest as $item)
+                        @php
+                            $statusDB = $item->status;
+                            $status="";
+                        @endphp
 
-                <div class="alert alert-primary alert-dismissible fade show mx-2 my-2" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                    @foreach ($errors->all() as $error)
-                        <script>
-                            toastr.error('{{ session('success') }}', '{{ session('error ') }}');
-                        </script>
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </div>
-
-            @endif
-            <div>
-
-                @if(session() -> has('success'))
-                    <div class="alert alert-primary alert-dismissible fade show mx-2 my-2" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            <span class="sr-only">Close</span>
-                        </button>
-                        <strong>{{Session::get( 'success' )}}</strong>
-                    </div>
-
-                @elseif(session() -> has('error'))
-
-                    <div class="alert alert-primary alert-dismissible fade show mx-2 my-2" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            <span class="sr-only">Close</span>
-                        </button>
-                        <strong>{{Session::get( 'error' )}}</strong>
-                    </div>
-
-                @endif
-            </div>
-
-            <div class=" col-md-12 card border-0 shadow rounded">
-                <div class="card-body">
-                    <h4 class="card-title">Daftar Request Jual Saya</h4>
-                    <table id="datatables" class="table table-responsive">
-                        <thead class="thead-inverse">
                         <tr>
-                            <th>No</th>
-                            <th>Estimasi Berat</th>
-                            <th>Status</th>
-                            <th>Alamat Lengkap</th>
-                            <th>Kontak</th>
-                            <th>Pinpoin</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @forelse ($sellRequest as $item)
-                            @php
-                                $statusDB = $item->status;
-                                $status="";
-                            @endphp
-
-                            <tr>
-                                <td>{{$loop->iteration}}</td>
-                                <td>{{$item->est_weight}}Kg</td>
-                                <td>
-                                    @if($statusDB ==0)
-                                        <span class="badge badge-warning">Menunggu Diproses</span>
-                                    @endif
-                                    @if($statusDB ==1)
-                                        <span class="badge badge-primary">{{$status}}</span>
-                                    @endif
-                                    @if($statusDB ==2)
-                                        <span class="badge badge-primary">{{$status}}</span>
-                                    @endif
-                                    @if($statusDB ==2)
-                                        <span class="badge badge-primary">{{$status}}</span>
-                                    @endif
-                                    @if($statusDB ==5)
-                                        <span class="badge badge-warning">{{Dibatalkan}}</span>
-                                    @endif
-                                </td>
-                                <td>{{$item->address}}</td>
-                                <td>{{$item->contact}}</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#exampleModal" data-lat="{{$item->lat}}"
-                                            data-long="{{$item->long}}" data-whatever="{{$item->long}}">Lihat Pin Poin
-                                    </button>
-                                </td>
-
-                            </tr>
-                        @empty
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$item->est_weight}}Kg</td>
+                            <td>
+                                @if($statusDB ==0)
+                                    <span class="badge badge-warning">Menunggu Diproses</span>
+                                @endif
+                                @if($statusDB ==1)
+                                    <span class="badge badge-primary">{{$status}}</span>
+                                @endif
+                                @if($statusDB ==2)
+                                    <span class="badge badge-primary">{{$status}}</span>
+                                @endif
+                                @if($statusDB ==2)
+                                    <span class="badge badge-primary">{{$status}}</span>
+                                @endif
+                                @if($statusDB ==5)
+                                    <span class="badge badge-warning">{{Dibatalkan}}</span>
+                                @endif
+                            </td>
+                            <td>{{$item->address}}</td>
+                            <td>{{$item->contact}}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModal" data-lat="{{$item->lat}}"
+                                        data-long="{{$item->long}}" data-whatever="{{$item->long}}">Lihat Pin Poin
                                 </button>
-                                <strong>Anda Belum Memiliki Permintaan Jual</strong>
-                            </div>
-                        @endforelse
-                        </tbody>
-                    </table>
+                            </td>
+
+                        </tr>
+                    @empty
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <strong>Anda Belum Memiliki Permintaan Jual</strong>
+                        </div>
+                    @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-xl" id="exampleModal"
+         tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="s-coordinate">Latitude : </p>
+                    <div id="mapid" style="width: 100%; height: 400px;"></div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Send message</button>
                 </div>
             </div>
         </div>
-
-        <div class="modal fade bd-example-modal-xl" id="exampleModal"
-             tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p id="s-coordinate">Latitude : </p>
-                        <div id="mapid" style="width: 100%; height: 400px;"></div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Send message</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div>
 
 
-        <script>
-            //message with toastr
-            @if(session()-> has('success'))
-            toastr.success('{{ session('success') }}', 'BERHASIL!');
-            @elseif(session()-> has('error'))
-            toastr.error('{{ session('error') }}', 'GAGAL!');
-            @endif
-        </script>
+    <script>
+        //message with toastr
+        @if(session()-> has('success'))
+        toastr.success('{{ session('success') }}', 'BERHASIL!');
+        @elseif(session()-> has('error'))
+        toastr.error('{{ session('error') }}', 'GAGAL!');
+        @endif
+    </script>
 
 @endsection

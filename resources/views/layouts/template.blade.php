@@ -2,17 +2,21 @@
 <html lang="en">
 
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>Atlantis Bootstrap 4 Admin Dashboard</title>
-    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-    <link rel="icon" href="{{ asset('main_asset/examples') }}/assets/img/icon.ico" type="image/x-icon" />
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport'/>
+    <link rel="icon" href="{{ asset('main_asset/examples') }}/assets/img/icon.ico" type="image/x-icon"/>
 
     <!-- Select2 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css">
 
     <!-- Toastr  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+          integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+          crossorigin="anonymous"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+            integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+            crossorigin="anonymous"></script>
 
 
     <!-- Fonts and icons -->
@@ -29,15 +33,15 @@
                 urls: ['{{ asset('main_asset/examples') }}/assets/css/fonts.min.css'
                 ]
             },
-            active: function() {
+            active: function () {
                 sessionStorage.fonts = true;
             }
         });
     </script>
 
-    @yield('header')
+@yield('header')
 
-    <!-- CSS Files -->
+<!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('main_asset/examples') }}/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('main_asset/examples') }}/assets/css/atlantis.css">
 
@@ -47,21 +51,21 @@
 </head>
 
 <body>
-    <div class="wrapper fullheight-side sidebar_minimize">
-        <!-- Logo Header -->
-        @include('layouts.header')
-        <!-- End Logo Header -->
-        <!-- Sidebar -->
-        @include('layouts.sidebar')
-        <!-- End Sidebar -->
+<div class="wrapper fullheight-side sidebar_minimize">
+    <!-- Logo Header -->
+@include('layouts.header')
+<!-- End Logo Header -->
+    <!-- Sidebar -->
+@include('layouts.sidebar')
+<!-- End Sidebar -->
 
-        <!-- Navbar Header -->
-        @include('layouts.navbar')
-        <!-- End Navbar -->
+    <!-- Navbar Header -->
+@include('layouts.navbar')
+<!-- End Navbar -->
 
-        <div class="main-panel full-height">
-            @yield('main')
-        </div>
+    <div class="main-panel full-height">
+        @yield('main')
+
         <footer class="footer">
             <div class="container-fluid">
                 <nav class="pull-left">
@@ -97,12 +101,12 @@
         </a>
         <div class="quick-sidebar-wrapper">
             <ul class="nav nav-tabs nav-line nav-color-secondary" role="tablist">
-                <li class="nav-item"> <a class="nav-link active show" data-toggle="tab" href="#messages" role="tab"
-                        aria-selected="true">Messages</a> </li>
-                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tasks" role="tab"
-                        aria-selected="false">Tasks</a> </li>
-                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab"
-                        aria-selected="false">Settings</a> </li>
+                <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#messages" role="tab"
+                                        aria-selected="true">Messages</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tasks" role="tab"
+                                        aria-selected="false">Tasks</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings" role="tab"
+                                        aria-selected="false">Settings</a></li>
             </ul>
             <div class="tab-content mt-3">
                 <div class="tab-chat tab-pane fade show active" id="messages" role="tabpanel">
@@ -114,19 +118,19 @@
                                     <div class="avatar-group">
                                         <div class="avatar">
                                             <img src="../assets/img/jm_denis.jpg" alt="..."
-                                                class="avatar-img rounded-circle border border-white">
+                                                 class="avatar-img rounded-circle border border-white">
                                         </div>
                                         <div class="avatar">
                                             <img src="../assets/img/chadengle.jpg" alt="..."
-                                                class="avatar-img rounded-circle border border-white">
+                                                 class="avatar-img rounded-circle border border-white">
                                         </div>
                                         <div class="avatar">
                                             <img src="../assets/img/mlane.jpg" alt="..."
-                                                class="avatar-img rounded-circle border border-white">
+                                                 class="avatar-img rounded-circle border border-white">
                                         </div>
                                         <div class="avatar">
                                             <img src="../assets/img/talha.jpg" alt="..."
-                                                class="avatar-img rounded-circle border border-white">
+                                                 class="avatar-img rounded-circle border border-white">
                                         </div>
                                         <div class="avatar">
                                             <span class="avatar-title rounded-circle border border-white">+</span>
@@ -138,7 +142,7 @@
                                             <a href="#">
                                                 <div class="avatar avatar-online">
                                                     <img src="../assets/img/jm_denis.jpg" alt="..."
-                                                        class="avatar-img rounded-circle border border-white">
+                                                         class="avatar-img rounded-circle border border-white">
                                                 </div>
                                                 <div class="user-data">
                                                     <span class="name">Jimmy Denis</span>
@@ -150,7 +154,7 @@
                                             <a href="#">
                                                 <div class="avatar avatar-offline">
                                                     <img src="../assets/img/chadengle.jpg" alt="..."
-                                                        class="avatar-img rounded-circle border border-white">
+                                                         class="avatar-img rounded-circle border border-white">
                                                 </div>
                                                 <div class="user-data">
                                                     <span class="name">Chad</span>
@@ -162,7 +166,7 @@
                                             <a href="#">
                                                 <div class="avatar avatar-offline">
                                                     <img src="../assets/img/mlane.jpg" alt="..."
-                                                        class="avatar-img rounded-circle border border-white">
+                                                         class="avatar-img rounded-circle border border-white">
                                                 </div>
                                                 <div class="user-data">
                                                     <span class="name">John Doe</span>
@@ -177,7 +181,7 @@
                                             <a href="#">
                                                 <div class="avatar avatar-online">
                                                     <img src="../assets/img/jm_denis.jpg" alt="..."
-                                                        class="avatar-img rounded-circle border border-white">
+                                                         class="avatar-img rounded-circle border border-white">
                                                 </div>
                                                 <div class="user-data2">
                                                     <span class="name">Jimmy Denis</span>
@@ -189,7 +193,7 @@
                                             <a href="#">
                                                 <div class="avatar avatar-offline">
                                                     <img src="../assets/img/chadengle.jpg" alt="..."
-                                                        class="avatar-img rounded-circle border border-white">
+                                                         class="avatar-img rounded-circle border border-white">
                                                 </div>
                                                 <div class="user-data2">
                                                     <span class="name">Chad</span>
@@ -201,7 +205,7 @@
                                             <a href="#">
                                                 <div class="avatar avatar-away">
                                                     <img src="../assets/img/talha.jpg" alt="..."
-                                                        class="avatar-img rounded-circle border border-white">
+                                                         class="avatar-img rounded-circle border border-white">
                                                 </div>
                                                 <div class="user-data2">
                                                     <span class="name">Talha</span>
@@ -219,7 +223,7 @@
                             <div class="user">
                                 <div class="avatar avatar-offline float-right ml-2">
                                     <img src="../assets/img/chadengle.jpg" alt="..."
-                                        class="avatar-img rounded-circle border border-white">
+                                         class="avatar-img rounded-circle border border-white">
                                 </div>
                                 <span class="name">Chad</span>
                                 <span class="last-active">Active 2h ago</span>
@@ -233,7 +237,7 @@
                                 <div class="message message-in">
                                     <div class="avatar avatar-sm">
                                         <img src="../assets/img/chadengle.jpg" alt="..."
-                                            class="avatar-img rounded-circle border border-white">
+                                             class="avatar-img rounded-circle border border-white">
                                     </div>
                                     <div class="message-body">
                                         <div class="message-content">
@@ -265,7 +269,7 @@
                                 <div class="message message-in">
                                     <div class="avatar avatar-sm">
                                         <img src="../assets/img/chadengle.jpg" alt="..."
-                                            class="avatar-img rounded-circle border border-white">
+                                             class="avatar-img rounded-circle border border-white">
                                     </div>
                                     <div class="message-body">
                                         <div class="message-content">
@@ -299,7 +303,7 @@
                                 <div class="message message-in">
                                     <div class="avatar avatar-sm">
                                         <img src="../assets/img/chadengle.jpg" alt="..."
-                                            class="avatar-img rounded-circle border border-white">
+                                             class="avatar-img rounded-circle border border-white">
                                     </div>
                                     <div class="message-body">
                                         <div class="message-content">
@@ -316,7 +320,7 @@
                         <div class="messages-form">
                             <div class="messages-form-control">
                                 <input type="text" placeholder="Type here"
-                                    class="form-control input-pill input-solid message-input">
+                                       class="form-control input-pill input-solid message-input">
                             </div>
                             <div class="messages-form-tool">
                                 <a href="#" class="attachment">
@@ -451,28 +455,28 @@
                                         <span class="item-label">Enable Notifications</span>
                                         <div class="item-control">
                                             <input type="checkbox" checked data-toggle="toggle" data-onstyle="primary"
-                                                data-style="btn-round">
+                                                   data-style="btn-round">
                                         </div>
                                     </li>
                                     <li>
                                         <span class="item-label">Signin with social media</span>
                                         <div class="item-control">
                                             <input type="checkbox" data-toggle="toggle" data-onstyle="primary"
-                                                data-style="btn-round">
+                                                   data-style="btn-round">
                                         </div>
                                     </li>
                                     <li>
                                         <span class="item-label">Backup storage</span>
                                         <div class="item-control">
                                             <input type="checkbox" data-toggle="toggle" data-onstyle="primary"
-                                                data-style="btn-round">
+                                                   data-style="btn-round">
                                         </div>
                                     </li>
                                     <li>
                                         <span class="item-label">SMS Alert</span>
                                         <div class="item-control">
                                             <input type="checkbox" checked data-toggle="toggle" data-onstyle="primary"
-                                                data-style="btn-round">
+                                                   data-style="btn-round">
                                         </div>
                                     </li>
                                 </ul>
@@ -483,35 +487,35 @@
                                         <span class="item-label">Email Notifications</span>
                                         <div class="item-control">
                                             <input type="checkbox" checked data-toggle="toggle" data-onstyle="primary"
-                                                data-style="btn-round">
+                                                   data-style="btn-round">
                                         </div>
                                     </li>
                                     <li>
                                         <span class="item-label">New Comments</span>
                                         <div class="item-control">
                                             <input type="checkbox" checked data-toggle="toggle" data-onstyle="primary"
-                                                data-style="btn-round">
+                                                   data-style="btn-round">
                                         </div>
                                     </li>
                                     <li>
                                         <span class="item-label">Chat Messages</span>
                                         <div class="item-control">
                                             <input type="checkbox" checked data-toggle="toggle" data-onstyle="primary"
-                                                data-style="btn-round">
+                                                   data-style="btn-round">
                                         </div>
                                     </li>
                                     <li>
                                         <span class="item-label">Project Updates</span>
                                         <div class="item-control">
                                             <input type="checkbox" data-toggle="toggle" data-onstyle="primary"
-                                                data-style="btn-round">
+                                                   data-style="btn-round">
                                         </div>
                                     </li>
                                     <li>
                                         <span class="item-label">New Tasks</span>
                                         <div class="item-control">
                                             <input type="checkbox" checked data-toggle="toggle" data-onstyle="primary"
-                                                data-style="btn-round">
+                                                   data-style="btn-round">
                                         </div>
                                     </li>
                                 </ul>
@@ -536,8 +540,6 @@
 
     <!-- jQuery Scrollbar -->
     <script src="{{ asset('main_asset/examples') }}/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-
-
 
 
     <!-- Chart JS -->
@@ -565,7 +567,7 @@
 {{--    <!-- Moment JS -->--}}
 {{--    <script src="{{ asset('main_asset/examples') }}/assets/js/plugin/moment/moment.min.js"></script>--}}
 
-    <!-- jQuery Vector Maps -->
+<!-- jQuery Vector Maps -->
     <script src="{{ asset('main_asset/examples') }}/assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
     <script src="{{ asset('main_asset/examples') }}/assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
 
@@ -582,7 +584,7 @@
 {{--    <script src="{{ asset('main_asset/examples') }}/assets/js/plugin/datepicker/bootstrap-datetimepicker.min.js">--}}
 {{--    </script>--}}
 
-    <!-- Bootstrap Tagsinput -->
+<!-- Bootstrap Tagsinput -->
     <script src="{{ asset('main_asset/examples') }}/assets/js/plugin/bootstrap-tagsinput/bootstrap-tagsinput.min.js">
     </script>
 
@@ -595,7 +597,7 @@
 {{--    <!-- Summernote -->--}}
 {{--    <script src="{{ asset('main_asset/examples') }}/assets/js/plugin/summernote/summernote-bs4.min.js"></script>--}}
 
-    <!-- Select2 -->
+<!-- Select2 -->
     <script src="{{ asset('main_asset/examples') }}/assets/js/plugin/select2/select2.full.min.js"></script>
 
     <!-- Sweet Alert -->
@@ -604,7 +606,7 @@
 {{--    <!-- Owl Carousel -->--}}
 {{--    <script src="{{ asset('main_asset/examples') }}/assets/js/plugin/owl-carousel/owl.carousel.min.js"></script>--}}
 
-    <!-- Magnific Popup -->
+<!-- Magnific Popup -->
     <script
         src="{{ asset('main_asset/examples') }}/assets/js/plugin/jquery.magnific-popup/jquery.magnific-popup.min.js">
     </script>
@@ -613,15 +615,15 @@
     <script src="{{ asset('main_asset/examples') }}/assets/js/atlantis.min.js"></script>
 
     <!-- Atlantis DEMO methods, don't include it in your project! -->
-    {{-- <script src="{{ asset('main_asset/examples') }}/assets/js/setting-demo.js">
-    </script> --}}
-    {{-- <script src="{{ asset('main_asset/examples') }}/assets/js/demo.js"></script>
-    --}}
-    {{-- <script src="{{ asset('main_asset/examples') }}/assets/js/demo.js"></script>
-    --}}
+{{-- <script src="{{ asset('main_asset/examples') }}/assets/js/setting-demo.js">
+</script> --}}
+{{-- <script src="{{ asset('main_asset/examples') }}/assets/js/demo.js"></script>
+--}}
+{{-- <script src="{{ asset('main_asset/examples') }}/assets/js/demo.js"></script>
+--}}
 
 
-    @yield('script')
+@yield('script')
 
 </body>
 

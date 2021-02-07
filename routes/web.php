@@ -28,6 +28,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('news/{id}/', [App\Http\Controllers\NewsController::class, 'read']);
+
 
 Route::group(['middleware’' => ['auth']], function () {
 
@@ -39,6 +41,14 @@ Route::group(['middleware’' => ['auth']], function () {
     Route::get('admin/sell-request/manage', 'RequestSellController@manage');
     Route::get('admin/sell-request/create', 'RequestSellController@create');
     Route::post('admin/sell-request/store', 'RequestSellController@store');
+
+    Route::get('admin/news/create', 'NewsController@adminCreate');
+
+    Route::get('admin/news/index',['uses'=>'NewsController@masterGetNews']);
+    Route::post('admin/news/{id}/destroy',['uses'=>'NewsController@destroy'])->name('news.delete');
+
+
+    Route::post('news/store', ['uses' => 'NewsController@store']);
 
     Route::group(['middleware' => ['mentor']], function () {
 

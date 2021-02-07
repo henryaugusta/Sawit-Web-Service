@@ -27,6 +27,9 @@ Route::get('/login', 'ApiUserController@login');
 
 Route::post('/price', 'PriceController@getAll');
 
+Route::post('/news/store', 'NewsController@store');
+Route::post('/news/all', 'NewsController@masterGetNews');
+
 
 
 
