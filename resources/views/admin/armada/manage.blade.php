@@ -123,7 +123,49 @@
         </div>
     </div>
 
+    <div class="modal fade bd-example-modal-lg" id="modalEdit"
+         tabindex="-1" role="dialog" aria-labelledby="modalEditLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEditLavel">New message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="title"></p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Send message</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection
+
+@section('script')
     <script>
+        $(document).ready(function () {
+            {{-- JS-SECTION-B --}}
+            $('#tagsinput').tagsinput({
+                tagClass: 'badge-info'
+            });
+
+            $('#modalEdit').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                title = button.data('title') // Extract info from data-* attributes
+                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                var modal = $(this)
+                modal.find('#title').text(title)
+                modal.find('.modal-title').text('Permintaan Jual Sawit')
+            })
+        });
+
         window.onload = function () {
             CKEDITOR.replace('content', {
                 filebrowserImageBrowseUrl: '/filemanager?type=Images',
@@ -143,34 +185,7 @@
             }
 
 
-            $(document).ready(function () {
-                {{-- JS-SECTION-B --}}
-                $('#tagsinput').tagsinput({
-                    tagClass: 'badge-info'
-                });
-
-
-                $.myfunction = function () {
-                    $("#previewName").text($("#inputTitle").val());
-                    var title = $.trim($("#inputTitle").val())
-                    if (title == "") {
-                        $("#previewName").text("Judul Berita Anda Akan Ditampilkan Disini")
-                    }
-                };
-
-                $("#inputTitle").keyup(function () {
-                    $.myfunction();
-                });
-
-            });
         }
     </script>
-
-
-
-
-
-
-@endsection
 
 

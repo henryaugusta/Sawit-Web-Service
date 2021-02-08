@@ -3,10 +3,11 @@
 @section('header')
     <script src="{{ asset('library/ckeditor/ckeditor.js') }}"></script>
     <style>
-        #previewCover {
+        #imgPreviewz {
             object-fit: cover;
-            height: 200px;
+            height: 300px;
             width: 100%;
+            border-radius: 20px;
         }
 
         .text_prev {
@@ -68,6 +69,7 @@
     <div class="container">
         <div class="container-fluid">
             @include('layouts.error')
+
             <div class="main-content-container container-fluid px-4">
                 <div class="page-header row no-gutters mb-4">
                     <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
@@ -100,23 +102,32 @@
                                             {{$item->title}}
                                         </a>
                                     </h3>
-                                    <div class="text_prev mb-3 card-text text_prev">
+                                    <div id="content_db{{$item->id}}" class="text_prev mb-3 card-text text_prev">
                                         {!! $item->content !!}
                                     </div>
+                                    <div class="d-none"
+                                         id="image_src{{$item->id}}">{{asset('/photo/news')."/".$item->pict_url }}</div>
                                     <div class="row">
                                         <a href="{{url('news/')."/".$item->id}}"
                                            class="btn btn-primary btn-rounded btn-sm">Read
                                             More</a>
-                                        <form action="{{route('news.delete',$item->id)}}" method="post">
+                                        <form action="{{route('news.delete',$item->id)}}" method="post"
+                                              onsubmit="return confirm('Anda Yakin Ingin Menghapus Berita Ini ??');">
                                             @method('post')
                                             @csrf
                                             <input type="hidden" name="redirectTo" value="admin/news/index">
                                             <button
                                                 class="btn btn-danger btn-rounded btn-sm">Hapus
                                             </button>
+                                            <button onclick="modalAct({{$item->id}})" type="button"
+                                                    class="btn btn-warning btn-rounded btn-sm"
+                                                    data-toggle="modal"
+                                                    data-target="#modalEdit"
+                                                    data-id="{{$item->id}}"
+                                                    data-title="{{$item->title}}">Edit
+                                            </button>
                                         </form>
-                                        <a href="{{url('news/')."/".$item->id}}"
-                                           class="btn btn-warning btn-rounded btn-sm">Edit</a>
+
                                     </div>
 
                                 </div>
@@ -130,66 +141,140 @@
                             </button>
                             <strong>News Feed Belum Tersedia</strong><br><br>
                             <a href="{{url('admin/news/create')}}">
-                            <button type="button" class="btn btn-outline-primary">Buat News Feed</button>
+                                <button type="button" class="btn btn-outline-primary">Buat News Feed</button>
                             </a>
                         </div>
                     @endforelse
-
                 </div>
-
-
             </div>
         </div>
     </div>
 
-    <script>
-        window.onload = function () {
-            CKEDITOR.replace('content', {
-                filebrowserImageBrowseUrl: '/filemanager?type=Images',
-                filebrowserImageUploadUrl: '/filemanager/upload?type=Images&_token=',
-                filebrowserBrowseUrl: '/filemanager?type=Files',
-                filebrowserUploadUrl: '/filemanager/upload?type=Files&_token='
-            })
+    <form action="{{url('news/update')}}" method="post"  enctype="multipart/form-data">
+        @method('POST')
+        @csrf
 
+
+        <input hidden id="update_idx" name="update_idx" value="">
+        <input hidden id="redirectTo" name="redirectTo" value="admin/news/index">
+
+        <div class="modal fade bd-example-modal-lg" id="modalEdit"
+             tabindex="-1" role="dialog" aria-labelledby="modalEditLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalEditLavel">New message</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="title"></p>
+                        <img class="mx-auto d-block" id="imgPreviewz"
+                             src="https://images.bisnis-cdn.com/posts/2020/01/20/1191916/antarafoto-harga-tbs-kelapa-sawit-mulai-membaik-071219-syf-3-1.jpg"
+                             alt="Card image cap">
+                        <div class="form-group">
+                            <label class="font-weight-bold">JUDUL</label>
+                            <input id="inputTitle" type="text"
+                                   class="form-control @error('title') is-invalid @enderror" name="title"
+                                   value="{{ old('title') }}" placeholder="Masukkan Judul Berita">
+
+                            <!-- error message untuk title -->
+                            @error('title')
+                            <div class="alert alert-danger mt-2">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label class="font-weight-bold">GAMBAR </label>
+                            <input id="input-image" type="file" onchange="previewPhoto()"
+                                   class="form-control @error('image') is-invalid @enderror"
+                                   name="image" >
+                            <small>(Upload baru untuk mengganti gambar)</small>
+                            @error('image')
+                            <div class="alert alert-danger mt-2">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
+
+                        <div class="form-group">
+                            <textarea
+                                id="ta_modal"
+                                class="form-control @error('contentz') is-invalid @enderror"
+                                name="update_content" rows="10"
+                                placeholder="Masukkan Konten Berita">
+                                {{ old('content') }}</textarea>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+@endsection
+
+@section('script')
+    <script>
+        let modalAct = (id) => {
+            let text_area = document.getElementById('ta_modal');
+            let title = document.getElementById('modalEditLavel');
+            let contentz = document.getElementById('content_db' + id).innerText;
+            let srcz = document.getElementById('image_src' + id).innerText;
+
+            let modal_image = document.getElementById('imgPreviewz');
+
+            document.getElementById("input-image").value = "";
+            document.getElementById("update_idx").value = `${id}`;
+
+            modal_image.src = srcz;
+            title.innerText = "Edit Feed News"
+            text_area.value = contentz;
+        }
+
+        $(document).ready(function () {
+            {{-- JS-SECTION-B --}}
+            $('#tagsinput').tagsinput({
+                tagClass: 'badge-info'
+            });
+
+
+            $('#modalEdit').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                var title = button.data('title') // Extract info from data-* attributes
+                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                var modal = $(this)
+                modal.find('#title').text(title)
+                modal.find('#inputTitle').val(title)
+
+
+            })
+        });
+
+        window.onload = function () {
             // jQuery and everything else is loaded
             var el = document.getElementById('input-image');
             el.onchange = function () {
                 var fileReader = new FileReader();
                 fileReader.readAsDataURL(document.getElementById("input-image").files[0])
                 fileReader.onload = function (oFREvent) {
-                    document.getElementById("imgPreview").src = oFREvent.target.result;
+                    document.getElementById("imgPreviewz").src = oFREvent.target.result;
                 };
             }
 
 
-            $(document).ready(function () {
-                {{-- JS-SECTION-B --}}
-                $('#tagsinput').tagsinput({
-                    tagClass: 'badge-info'
-                });
-
-
-                $.myfunction = function () {
-                    $("#previewName").text($("#inputTitle").val());
-                    var title = $.trim($("#inputTitle").val())
-                    if (title == "") {
-                        $("#previewName").text("Judul Berita Anda Akan Ditampilkan Disini")
-                    }
-                };
-
-                $("#inputTitle").keyup(function () {
-                    $.myfunction();
-                });
-
-            });
         }
     </script>
-
-
-
-
-
-
 @endsection
 
 

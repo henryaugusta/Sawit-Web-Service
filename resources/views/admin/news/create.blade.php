@@ -60,7 +60,6 @@
                             <div class="card card-small mb-3">
                                 <div class="card-body">
                                     <div class="form-group">
-
                                         <label class="font-weight-bold">JUDUL</label>
                                         <input id="inputTitle" type="text"
                                                class="form-control @error('title') is-invalid @enderror" name="title"
@@ -215,7 +214,6 @@
                 $('#tagsinput').tagsinput({
                     tagClass: 'badge-info'
                 });
-
 
 
                 $.myfunction = function () {

@@ -49,6 +49,7 @@ Route::group(['middleware’' => ['auth']], function () {
 
 
     Route::post('news/store', ['uses' => 'NewsController@store']);
+    Route::post('news/update', ['uses' => 'NewsController@update']);
 
     Route::group(['middleware' => ['mentor']], function () {
 

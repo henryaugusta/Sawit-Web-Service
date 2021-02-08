@@ -11,12 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css">
 
     <!-- Toastr  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
-          integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
-          crossorigin="anonymous"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
-            integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
-            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"/>
 
 
     <!-- Fonts and icons -->
@@ -44,13 +39,83 @@
 <!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('main_asset/examples') }}/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('main_asset/examples') }}/assets/css/atlantis.css">
+    <style>
+        #work-in-progress {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            font-size: 150px;
+            text-align: center;
+            vertical-align: middle;
+            color: #000000;
+            z-index: 200000;
+            /*background-color: #FFFFFF;*/
+        }
 
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    {{--
-    <link rel="stylesheet" href="../assets/css/demo.css"> --}}
+        .work-spinner {
+            background-color: rgba(0, 0, 0, 0);
+            border: 9px solid rgba(27, 61, 226, 0.9);
+            opacity: .9;
+            border-left: 5px solid rgba(0, 0, 0, 0);
+            border-radius: 120px;
+            -webkit-box-shadow: 0 0 35px #1B3DE2;
+            box-shadow: 0 0 35px #1B3DE2;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            -moz-animation: spin .5s infinite linear;
+            -webkit-animation: spin .5s infinite linear;
+            -o-animation: spin .5s infinite linear;
+            animation: spin .5s infinite linear;
+        }
+
+        @-moz-keyframes spin {
+            from {
+                -moz-transform: rotate(0deg);
+            }
+            to {
+                -moz-transform: rotate(360deg);
+            }
+        }
+
+        @-webkit-keyframes spin {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @-o-keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/css/demo.css">
+
 </head>
 
 <body>
+
+
+
+<script>
+
+</script>
 <div class="wrapper fullheight-side sidebar_minimize">
     <!-- Logo Header -->
 @include('layouts.header')
@@ -62,9 +127,26 @@
     <!-- Navbar Header -->
 @include('layouts.navbar')
 <!-- End Navbar -->
+    <div id="work-in-progress" class="container-fluid h-100 bg-white">
+        <div class="container d-flex h-100">
+            <div class="row justify-content-center align-self-center w-100 ">
+                <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                <div>
+                    <lottie-player
+                        src="https://assets7.lottiefiles.com/datafiles/kn5W819UTw4eDwEBTOscVxDtsBaRzRSLnlqWen3o/Loading/data.json"
+                        background="#FFFFFF" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+                </div> <br>
+                <h1 class="w-100 text-center">Loading.....</h1>
+            </div>
+        </div>
+    </div>
 
     <div class="main-panel full-height">
+
+
         @yield('main')
+
+
 
         <footer class="footer">
             <div class="container-fluid">
@@ -72,7 +154,7 @@
                     <ul class="nav">
                         <li class="nav-item">
                             <a class="nav-link" href="http://www.themekita.com">
-                                ThemeKita
+                                Feylaboratory
                             </a>
                         </li>
                         <li class="nav-item">
@@ -89,11 +171,12 @@
                 </nav>
                 <div class="copyright ml-auto">
                     2018, made with <i class="fa fa-heart heart text-danger"></i> by <a
-                        href="http://www.themekita.com">ThemeKita</a>
+                        href="http://www.themekita.com">Feylaboratory</a>
                 </div>
             </div>
         </footer>
     </div>
+
 
     <div class="quick-sidebar">
         <a href="#" class="close-quick-sidebar">
@@ -597,11 +680,13 @@
 {{--    <!-- Summernote -->--}}
 {{--    <script src="{{ asset('main_asset/examples') }}/assets/js/plugin/summernote/summernote-bs4.min.js"></script>--}}
 
-<!-- Select2 -->
+    <!-- Select2 -->
     <script src="{{ asset('main_asset/examples') }}/assets/js/plugin/select2/select2.full.min.js"></script>
 
     <!-- Sweet Alert -->
     <script src="{{ asset('main_asset/examples') }}/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+
 
 {{--    <!-- Owl Carousel -->--}}
 {{--    <script src="{{ asset('main_asset/examples') }}/assets/js/plugin/owl-carousel/owl.carousel.min.js"></script>--}}
@@ -615,15 +700,34 @@
     <script src="{{ asset('main_asset/examples') }}/assets/js/atlantis.min.js"></script>
 
     <!-- Atlantis DEMO methods, don't include it in your project! -->
-{{-- <script src="{{ asset('main_asset/examples') }}/assets/js/setting-demo.js">
-</script> --}}
-{{-- <script src="{{ asset('main_asset/examples') }}/assets/js/demo.js"></script>
---}}
-{{-- <script src="{{ asset('main_asset/examples') }}/assets/js/demo.js"></script>
---}}
+    {{-- <script src="{{ asset('main_asset/examples') }}/assets/js/setting-demo.js">
+    </script> --}}
+    {{-- <script src="{{ asset('main_asset/examples') }}/assets/js/demo.js"></script>
+    --}}
+    {{-- <script src="{{ asset('main_asset/examples') }}/assets/js/demo.js"></script>
+    --}}
 
 
-@yield('script')
+    @yield('script')
+
+    <script>
+
+        $(document).ready(function () {
+            $(window).bind("load", function () {
+                $('#work-in-progress').fadeOut(100);
+            });
+
+            $(window).bind("beforeunload", function () {
+                $('#work-in-progress').show(100);
+            });
+
+            $(window).on('unload', function(){
+                $('#work-in-progress').show(100);
+            });
+        })
+
+    </script>
+
 
 </body>
 

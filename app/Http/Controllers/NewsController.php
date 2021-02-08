@@ -36,6 +36,69 @@ class NewsController extends Controller
             ->with(compact('news'));
     }
 
+    public function update(Request $request){
+        $rules = [
+            'title' => 'required',
+            'update_content' => 'required',
+            'image'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ];
+
+        $customMessages = [
+            'required' => 'Mohon Isi Kolom :attribute terlebih dahulu'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
+        $news = News::findOrFail($request->update_idx);
+
+        if ($request->file('image') == "") {
+            //IF IMAGE NOT REPLACED
+            $news->update([
+                'title' => $request->title,
+                'content' => $request->update_content
+            ]);
+        }else{
+            //IF IMAGE IS REPLACED
+            $basePath = "photo/news/";
+            if (\File::exists(public_path("$basePath/" . $news->pict_url))) {
+                \File::delete(public_path("$basePath/" . $news->pict_url));
+            }
+            $image = $request->file('image');
+            $destinationPath = 'photo/news/';
+            $file_name = Carbon::now()->timestamp . "_" . $image->getClientOriginalName();
+            $image->move($destinationPath, $file_name);
+            $news->update([
+                'pict_url' => $file_name,
+                'title' => $request->title,
+                'content' => $request->update_content
+            ]);
+        }
+
+        if ($news){
+            if (Helper::isAPI()){
+                return response()->json([
+                    'http_response' => 200,
+                    'status' => 1,
+                    'message_id' => 'Berhasil Mengupdate News Feed',
+                    'message' => 'News Feed Update has failed',
+                ]);
+            }else{
+                return redirect("$request->redirectTo")->with(['success' => "News Feed Berhasil Diupdate"]);
+            }
+        }else{
+            if (Helper::isAPI()){
+                return response()->json([
+                    'http_response' => 400,
+                    'status' => 0,
+                    'message_id' => 'Gagal Mengupdate News Feed',
+                    'message' => 'News Feed Update has failed',
+                ]);
+            }else{
+                return redirect("$request->redirectTo")->with(['success' => "News Feed Gagal Diupdate"]);
+            }
+        }
+    }
+
     public function destroy($id, Request $request)
     {
 
@@ -67,7 +130,7 @@ class NewsController extends Controller
                     'http_response' => 400,
                     'status' => 0,
                     'message_id' => 'Gagal Menghapus di News Feed',
-                    'message' => 'News Post Success',
+                    'message' => 'News Post Failed',
                 ]);
             } else {
                 return redirect("$request->redirectTo")->with(['success' => "News Feed Gagal Dihapus"]);
@@ -114,7 +177,6 @@ class NewsController extends Controller
         $image = $request->file('image');
         $destinationPath = 'photo/news/';
         $file_name = Carbon::now()->timestamp . "_" . $image->getClientOriginalName();
-
         $image->move($destinationPath, $file_name);
 //        Storage::disk('public')->putFileAs($destinationPath, $image, $file_name);
         $store = News::create([

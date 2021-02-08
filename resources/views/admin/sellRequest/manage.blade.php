@@ -24,11 +24,7 @@
                 sLat = button.data('lat');
                 sLong = button.data('long');
 
-                var mymap = L.map('mapid').setView([sLat, sLong], 2
-                php
-                3
-            )
-                ;
+                var mymap = L.map('mapid').setView([sLat, sLong], 2);
                 var popup = L.popup();
                 let myMarker = L.marker([sLat, sLong]).addTo(mymap)
                     .bindPopup("Silakan Pindahkan Pin Ini Ke Lokasi Anda.").openPopup();
@@ -298,9 +294,9 @@
         </div>
     </div>
 
-    <div class="modal fade bd-example-modal-xl" id="exampleModal"
+    <div class="modal fade bd-example-modal-lg" id="exampleModal"
          tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">New message</h5>
