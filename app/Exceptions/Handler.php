@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use App\Http\Resources\UserResource;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Arr;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -94,6 +95,14 @@ class Handler extends ExceptionHandler
                     'status_code' => 0,
                 ], 405);
             }
+
+//            if ($exception instanceof QueryException) {
+//                return response()->json([
+//                    'message' => '422 Unprocessable Entity',
+//                    'http_response' => 422,
+//                    'status_code' => 0,
+//                ], 405);
+//            }
             return parent::render($request, $exception);
 
             return response()->json([

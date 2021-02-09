@@ -22,8 +22,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post('/users', 'ApiUserController@getAll');
 Route::post('/user/login', 'ApiUserController@login');
-Route::post('/user/registration', 'ApiUserController@store');
+Route::post('/user/registration', 'UserController@store');
 Route::get('/login', 'ApiUserController@login');
+
+Route::get('/user/{id}/profile', ['uses' => 'UserController@profile']);
+Route::post('/user/profile/update', ['uses' => 'UserController@update']);
+Route::post('/user/change_user_password', ['uses' => 'UserController@changePassword']);
+Route::post('/user/change_status', ['uses' => 'UserController@changeStatus']);
 
 Route::post('/price', 'PriceController@getAll');
 

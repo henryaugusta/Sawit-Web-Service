@@ -46,77 +46,77 @@
             <div class="main-content-container container-fluid px-4">
                 <div class="page-header row no-gutters mb-4">
                     <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-                        <span class="text-uppercase page-subtitle">Manage News Feed</span>
-                        <h3 class="page-title">News Feed</h3>
+                        <span class="text-uppercase page-subtitle">Manage Armada Perusahaan</span>
+                        <h3 class="page-title">Armada Perusahaan</h3>
                     </div>
                 </div>
 
-                <div class="row">
-                    @forelse($news as $item )
-                        <p>Testingg </p>
-                    @empty
+{{--                <div class="row">--}}
+{{--                    @forelse($news as $item )--}}
+{{--                        <p>Testingg </p>--}}
+{{--                    @empty--}}
 
-                    @endforelse
-                    <div class="col-lg-4 col-md-12">
-                        <div class="card card-post card-round">
-                            <img class="card-img-top" id="imgPreview"
-                                 src="https://images.bisnis-cdn.com/posts/2020/01/20/1191916/antarafoto-harga-tbs-kelapa-sawit-mulai-membaik-071219-syf-3-1.jpg"
-                                 alt="Card image cap">
-                            <div class="card-body">
-                                <div class="d-flex">
-                                    <div class="avatar">
-                                        <img src="{{ Storage::url('public/profile/') . Auth::user()->profile_url }}"
-                                             alt="..." class="avatar-img rounded-circle">
-                                    </div>
-                                    <div class="info-post ml-2">
-                                        <p class="username">{{ Auth::user()->name }}</p>
-                                        <p class="date text-muted">20 Jan 18</p>
-                                    </div>
-                                </div>
-                                <div class="separator-solid"></div>
-                                <h3 class="card-title" id="previewName">
-                                    <a href="#">
-                                        Judul Berita Anda Ditampilkan Disini
-                                    </a>
-                                </h3>
-                                <p class="card-text">Some quick example text to build on the card title and make up
-                                    the bulk
-                                    of the card's content.</p>
-                                <a href="#" class="btn btn-primary btn-rounded btn-sm">Read More</a>
-                            </div>
-                        </div>
-                    </div>
+{{--                    @endforelse--}}
+{{--                    <div class="col-lg-4 col-md-12">--}}
+{{--                        <div class="card card-post card-round">--}}
+{{--                            <img class="card-img-top" id="imgPreview"--}}
+{{--                                 src="https://images.bisnis-cdn.com/posts/2020/01/20/1191916/antarafoto-harga-tbs-kelapa-sawit-mulai-membaik-071219-syf-3-1.jpg"--}}
+{{--                                 alt="Card image cap">--}}
+{{--                            <div class="card-body">--}}
+{{--                                <div class="d-flex">--}}
+{{--                                    <div class="avatar">--}}
+{{--                                        <img src="{{ Storage::url('public/profile/') . Auth::user()->profile_url }}"--}}
+{{--                                             alt="..." class="avatar-img rounded-circle">--}}
+{{--                                    </div>--}}
+{{--                                    <div class="info-post ml-2">--}}
+{{--                                        <p class="username">{{ Auth::user()->name }}</p>--}}
+{{--                                        <p class="date text-muted">20 Jan 18</p>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="separator-solid"></div>--}}
+{{--                                <h3 class="card-title" id="previewName">--}}
+{{--                                    <a href="#">--}}
+{{--                                        Judul Berita Anda Ditampilkan Disini--}}
+{{--                                    </a>--}}
+{{--                                </h3>--}}
+{{--                                <p class="card-text">Some quick example text to build on the card title and make up--}}
+{{--                                    the bulk--}}
+{{--                                    of the card's content.</p>--}}
+{{--                                <a href="#" class="btn btn-primary btn-rounded btn-sm">Read More</a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
-                    <div class="col-lg-4 col-md-12">
-                        <div class="card card-post card-round">
-                            <img class="card-img-top" id="imgPreview"
-                                 src="https://images.bisnis-cdn.com/posts/2020/01/20/1191916/antarafoto-harga-tbs-kelapa-sawit-mulai-membaik-071219-syf-3-1.jpg"
-                                 alt="Card image cap">
-                            <div class="card-body">
-                                <div class="d-flex">
-                                    <div class="avatar">
-                                        <img src="{{ Storage::url('public/profile/') . Auth::user()->profile_url }}"
-                                             alt="..." class="avatar-img rounded-circle">
-                                    </div>
-                                    <div class="info-post ml-2">
-                                        <p class="username">{{ Auth::user()->name }}</p>
-                                        <p class="date text-muted">20 Jan 18</p>
-                                    </div>
-                                </div>
-                                <div class="separator-solid"></div>
-                                <h3 class="card-title" id="previewName">
-                                    <a href="#">
-                                        Judul Berita Anda Ditampilkan Disini
-                                    </a>
-                                </h3>
-                                <p class="card-text">Some quick example text to build on the card title and make up
-                                    the bulk
-                                    of the card's content.</p>
-                                <a href="#" class="btn btn-primary btn-rounded btn-sm">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+{{--                    <div class="col-lg-4 col-md-12">--}}
+{{--                        <div class="card card-post card-round">--}}
+{{--                            <img class="card-img-top" id="imgPreview"--}}
+{{--                                 src="https://images.bisnis-cdn.com/posts/2020/01/20/1191916/antarafoto-harga-tbs-kelapa-sawit-mulai-membaik-071219-syf-3-1.jpg"--}}
+{{--                                 alt="Card image cap">--}}
+{{--                            <div class="card-body">--}}
+{{--                                <div class="d-flex">--}}
+{{--                                    <div class="avatar">--}}
+{{--                                        <img src="{{ Storage::url('public/profile/') . Auth::user()->profile_url }}"--}}
+{{--                                             alt="..." class="avatar-img rounded-circle">--}}
+{{--                                    </div>--}}
+{{--                                    <div class="info-post ml-2">--}}
+{{--                                        <p class="username">{{ Auth::user()->name }}</p>--}}
+{{--                                        <p class="date text-muted">20 Jan 18</p>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="separator-solid"></div>--}}
+{{--                                <h3 class="card-title" id="previewName">--}}
+{{--                                    <a href="#">--}}
+{{--                                        Judul Berita Anda Ditampilkan Disini--}}
+{{--                                    </a>--}}
+{{--                                </h3>--}}
+{{--                                <p class="card-text">Some quick example text to build on the card title and make up--}}
+{{--                                    the bulk--}}
+{{--                                    of the card's content.</p>--}}
+{{--                                <a href="#" class="btn btn-primary btn-rounded btn-sm">Read More</a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
 
             </div>

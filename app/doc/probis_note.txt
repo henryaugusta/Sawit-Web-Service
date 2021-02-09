@@ -1,5 +1,21 @@
 
 
+Status
+0 : deleted
+1 : active
+2 : suspended
+
+Sex
+1 : Male
+2 : Female
+
+Status Jual :
+
+1 : admin
+2 : staff
+3 : customer
+
+
 
 Penghitungan Margin :
 misal harga sawit 1000 Rupiah dan pelanggan jual 1600 Kg

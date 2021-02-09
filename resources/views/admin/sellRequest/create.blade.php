@@ -240,7 +240,6 @@
 
 
                     <script>
-
                         const clearPreview = (elementID) => {
                             let div = document.getElementById(elementID);
                             while (div.firstChild) {

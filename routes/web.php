@@ -47,9 +47,17 @@ Route::group(['middleware’' => ['auth']], function () {
     Route::get('admin/news/index',['uses'=>'NewsController@masterGetNews']);
     Route::post('admin/news/{id}/destroy',['uses'=>'NewsController@destroy'])->name('news.delete');
 
+    Route::get('admin/armada/manage', ['uses'=>'ArmadaController@adminManage']);
+    Route::get('admin/armada/create', ['uses'=>'ArmadaController@adminCreate']);
+
 
     Route::post('news/store', ['uses' => 'NewsController@store']);
     Route::post('news/update', ['uses' => 'NewsController@update']);
+
+    Route::get('user/{id}/profile', ['uses' => 'UserController@profile']);
+    Route::post('user/profile/update', ['uses' => 'UserController@update']);
+    Route::post('user/change_user_password', ['uses' => 'UserController@changePassword']);
+    Route::post('user/change_status', ['uses' => 'UserController@changeStatus']);
 
     Route::group(['middleware' => ['mentor']], function () {
 

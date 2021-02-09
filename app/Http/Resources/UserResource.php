@@ -2,14 +2,14 @@
 
 namespace App\Http\Resources;
 
+use App\Models\SellRequest;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
 {
-//<option value="1">Aktif</option>
-//<option value="2">Suspended</option>
-//<option value="3">Blokir</option>
+
     protected $status_text = "";
+    protected $sellRequest = null;
     /**
      * Transform the resource into an array.
      *
@@ -23,12 +23,16 @@ class UserResource extends JsonResource
             case 1:
                 $this->status_text = "Active";
                 break;
-            case 2:
+            case 0:
                 $this->status_text = "Suspended";
                 break;
             default:
                 $this->status_text = "Blocked";
         }
+
+        $sr = SellRequest::all();
+        $sellRequest = RequestSellResource::collection($sr);
+
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -38,6 +42,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'sell_request' => $this->sellRequest,
         ];
     }
 }

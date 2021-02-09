@@ -3,7 +3,8 @@
         <div class="sidebar-content">
             <div class="user">
                 <div class="avatar-sm float-left mr-2">
-                    <img src="{{asset('main_asset/examples')}}/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                    <img src='{{asset('photo/profile'."/".Auth::user()->profile_url)}}' alt="..."
+                         class="avatar-img rounded-circle">
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
@@ -82,7 +83,7 @@
                     </div>
                 </li>
 
-                <li class="nav-item {{ (Request::is('admin/price/manage')) ? 'active' : ''}}">
+                <li class="nav-item {{ (Request::is('admin/sell-request/*')) ? 'active' : ''}}">
                     <a data-toggle="collapse" href="#emsadal-nav">
                         <i class="far fa-paper-plane"></i>
                         <p>Permintaan Jual</p>
@@ -111,6 +112,30 @@
                         <i class="fas fa-money-bill-wave"></i>
                         <p>Harga CPO</p>
                     </a>
+                </li>
+
+                <li class="nav-item {{ (Request::is('admin/armada/*')) ? 'active' : ''}}">
+                    <a data-toggle="collapse" href="#dsdv">
+                        <i class="fas fa-truck"></i>
+                        <p>Armada (Truk)</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse {{ (Request::is('admin/armada/*')) ? 'show' : ''}}" id="dsdv">
+                        <ul class="nav nav-collapse">
+                            <li  class="{{ (Request::is('admin/armada/create')) ? 'active' : ''}}">
+                                <a href="{{url('admin/armada/create')}}">
+                                    <span class="sub-item ">
+                                        Armada Baru</span>
+                                </a>
+                            </li>
+                            <li  class="{{ (Request::is('admin/armada/manage')) ? 'active' : ''}}">
+                                <a href="{{url('admin/armada/manage')}}">
+                                    <span class="sub-item ">
+                                        Manage Armada</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
 
                 <li class="nav-item">

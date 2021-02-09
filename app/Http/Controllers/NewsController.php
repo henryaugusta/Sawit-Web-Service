@@ -50,7 +50,6 @@ class NewsController extends Controller
         $this->validate($request, $rules, $customMessages);
 
         $news = News::findOrFail($request->update_idx);
-
         if ($request->file('image') == "") {
             //IF IMAGE NOT REPLACED
             $news->update([
@@ -140,22 +139,33 @@ class NewsController extends Controller
 
     public function masterGetNews()
     {
+        $status=1;
+        $http=200;
         $isAPI = Helper::isAPI();
-
         $news = DB::table('news')
             ->leftJoin('users', 'users.id', '=', 'news.posted_by')
             ->select(
                 'news.*',
                 'users.name as user_name',
                 'users.profile_url as user_photo',
-            )->get();
-
-        if ($isAPI) {
-
+            )->orderBy('news.id','desc')->get();
+        if (!$isAPI){
+            return view('admin/news/manage')
+                ->with(compact('news'));
         }
+        if ($news == null || $news == ""){
+            $status = 0;
+            $http = 400;
+        }
+        return response()->json([
+            'http_response' => $http,
+            'status' => $status,
+            'message_id' => 'Berhasil Mengambil Data News Feed',
+            'message' => 'News Feed Retrieved Successfully',
+            'data_count' => count($news),
+            'data' => $news
+        ]);
 
-        return view('admin.news.manage')
-            ->with(compact('news'));
     }
 
     public function store(Request $request)

@@ -1,5 +1,4 @@
 <div>
-
     <!-- Toastr -->
     <script src="{{ asset('main_asset/examples') }}/assets/js/core/jquery.3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
