@@ -41,7 +41,7 @@
 
     <div class="container">
 
-        <form action="{{url('news/store')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{url('admin/armada/store')}}" method="POST" enctype="multipart/form-data">
             <div class="container-fluid">
                 @include('layouts.error')
 
@@ -86,10 +86,10 @@
                                     <div class="form-group">
                                         <label class="font-weight-bold">No Mesin</label>
                                         <input id="nomor_mesin" type="text"
-                                               class="form-control @error('nomor_mesin') is-invalid @enderror" name="nomor_mesin"
-                                               value="{{ old('nomor_mesin') }}" placeholder="No Mesin">
+                                               class="form-control @error('no_mesin') is-invalid @enderror" name="no_mesin"
+                                               value="{{ old('no_mesin') }}" placeholder="No Mesin">
                                         <!-- error message untuk title -->
-                                        @error('nomor_mesin')
+                                        @error('no_mesin')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
                                         </div>
@@ -129,17 +129,14 @@
                                     <div class="card border-0 shadow rounded">
                                         <div class="card-body">
                                             @csrf
-
-
                                             <div class="form-group fallback">
-                                                <label class="font-weight-bold">GAMBARxxx</label>
+                                                <label class="font-weight-bold">GAMBAR</label>
                                                 <input id="upload_file" type="file"
                                                        class="form-control @error('image') is-invalid @enderror"
                                                        required name="upload_file[]"
                                                        onchange="previewImage();"
                                                        multiple>
 
-                                                <!-- error message untuk title -->
                                                 @error('image')
                                                 <div class="alert alert-danger mt-2">
                                                     {{ $message }}
@@ -170,15 +167,15 @@
                                             </script>
 
                                             <div class="form-group">
-                                                <label class="font-weight-bold">Konten Berita</label>
+                                                <label class="font-weight-bold">Deskripsi/Catatan Tambahan</label>
                                                 <textarea
                                                     required
-                                                    class="form-control ckeditor @error('contentz') is-invalid @enderror"
-                                                    name="contentz" rows="15"
-                                                    placeholder="Masukkan Konten Berita">{{ old('content') }}</textarea>
+                                                    class="form-control ckeditor @error('description') is-invalid @enderror"
+                                                    name="description" rows="15"
+                                                    placeholder="">{{ old('description') }}</textarea>
 
                                                 <!-- error message untuk content -->
-                                                @error('contentz')
+                                                @error('description')
                                                 <div class="alert alert-danger mt-2">
                                                     {{ $message }}
                                                 </div>
@@ -218,7 +215,7 @@
                                     <div class="separator-solid"></div>
                                     <h3 class="card-title" id="previewName">
                                         <a href="#">
-                                            Judul Berita Anda Ditampilkan Disini
+                                            Nama Truck Anda Ditampilkan Disini
                                         </a>
                                     </h3>
                                     <p class="card-text">Some quick example text to build on the card title and make up
@@ -248,8 +245,12 @@
                                     <h6 class="m-0">Petunjuk</h6>
                                 </div>
                                 <div class='card-body p-0'>
-                                    <div class="container">
-                                        Test
+                                    <div class="container m-2">
+                                        <ul>
+                                            <li>Data Truck ini akan digunakan oleh staff saat penjemputan sawit</li>
+                                            <li>Untuk mengganti gambar, klik ulang pada file untuk memilih ulang</li>
+                                            <li>Foto dapat lebih dari 1 </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -268,23 +269,6 @@
 @section('script')
     <script>
         window.onload = function () {
-            CKEDITOR.replace('content', {
-                filebrowserImageBrowseUrl: '/filemanager?type=Images',
-                filebrowserImageUploadUrl: '/filemanager/upload?type=Images&_token=',
-                filebrowserBrowseUrl: '/filemanager?type=Files',
-                filebrowserUploadUrl: '/filemanager/upload?type=Files&_token='
-            })
-
-            // jQuery and everything else is loaded
-            var el = document.getElementById('input-image');
-            el.onchange = function () {
-                var fileReader = new FileReader();
-                fileReader.readAsDataURL(document.getElementById("input-image").files[0])
-                fileReader.onload = function (oFREvent) {
-                    document.getElementById("imgPreview").src = oFREvent.target.result;
-                };
-            }
-
             $(document).ready(function () {
                 {{-- JS-SECTION-B --}}
                 $('#tagsinput').tagsinput({
@@ -312,7 +296,7 @@
                     $("#previewName").text($("#inputTitle").val());
                     var title = $.trim($("#inputTitle").val())
                     if (title == "") {
-                        $("#previewName").text("Judul Berita Anda Akan Ditampilkan Disini")
+                        $("#previewName").text("Nama Truck Anda Ditampilkan Disini")
                     }
                 };
 

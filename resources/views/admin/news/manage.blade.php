@@ -134,10 +134,8 @@
                             </div>
                         </div>
                     @empty
-                        <div class="alert alert-primary  fade show container-fluid" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                <span class="sr-only">Close</span>
+                        <div class="alert alert-primary fade show container-fluid" role="alert">
+                            <button type="button" class="close" >
                             </button>
                             <strong>News Feed Belum Tersedia</strong><br><br>
                             <a href="{{url('admin/news/create')}}">

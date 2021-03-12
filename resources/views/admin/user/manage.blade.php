@@ -313,7 +313,9 @@
                                 <td>
                                     <div class="avatar-sm float-left mr-2">
                                         <img src='{{asset('photo/profile'."/$item->profile_url")}}' alt="..."
-                                             class="avatar-img rounded-circle">
+                                             class="avatar-img rounded-circle" 
+                                             onerror="this.src='{{asset('photo/no-photos.png')}}';"
+                                             >
                                     </div>
                                 </td>
 

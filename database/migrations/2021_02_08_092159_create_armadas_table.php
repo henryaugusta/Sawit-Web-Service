@@ -17,14 +17,9 @@ class CreateArmadasTable extends Migration
             $table->id();
             $table->string('merk_mobil')->nullable();
             $table->string('nopol')->unique()->nullable();
-            $table->string('no-mesin')->unique()->nullable();
-            $table->float('max-cap',18,4)->nullable();
-            $table->float('max-weight',18,4)->nullable();
-            $table->string('photo_1')->nullable();
-            $table->string('photo_2')->nullable();
-            $table->string('photo_3')->nullable();
-            $table->string('photo_4')->nullable();
-            $table->string('photo_5')->nullable();
+            $table->string('no_mesin')->unique()->nullable();
+            $table->float('max_cap',18,4)->nullable();
+            $table->float('max_weight',18,4)->nullable();
             $table->timestamps();
         });
     }
