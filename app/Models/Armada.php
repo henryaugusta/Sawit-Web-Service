@@ -13,14 +13,9 @@ class Armada extends Model
     protected $fillable = [
         "merk_mobil",
         "nopol",
-        "no-mesin",
-        "max-cap",
-        "max-weight",
-        "photo_1",
-        "photo_2",
-        "photo_3",
-        "photo_4",
-        "photo_5",
+        "no_mesin",
+        "max_cap",
+        "max_weight",
     ];
 
     /**

@@ -51,6 +51,8 @@ Route::group(['middleware’' => ['auth']], function () {
     Route::get('admin/armada/create', ['uses'=>'ArmadaController@adminCreate']);
 
 
+    Route::post('admin/armada/store', ['uses' => 'ArmadaController@store']);
+
     Route::post('news/store', ['uses' => 'NewsController@store']);
     Route::post('news/update', ['uses' => 'NewsController@update']);
 

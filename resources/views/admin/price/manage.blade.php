@@ -173,7 +173,6 @@
                                 class="fa fa-plus"></i></span> Input Harga Baru
                     </a>
                     <div class="table-responsive">
-
                         <table id="datatables" class="table ">
                             <thead class="thead-inverse">
                             <tr>

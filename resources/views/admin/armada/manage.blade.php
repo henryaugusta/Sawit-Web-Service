@@ -51,72 +51,37 @@
                     </div>
                 </div>
 
-{{--                <div class="row">--}}
-{{--                    @forelse($news as $item )--}}
-{{--                        <p>Testingg </p>--}}
-{{--                    @empty--}}
+                <div class="table-responsive">
 
-{{--                    @endforelse--}}
-{{--                    <div class="col-lg-4 col-md-12">--}}
-{{--                        <div class="card card-post card-round">--}}
-{{--                            <img class="card-img-top" id="imgPreview"--}}
-{{--                                 src="https://images.bisnis-cdn.com/posts/2020/01/20/1191916/antarafoto-harga-tbs-kelapa-sawit-mulai-membaik-071219-syf-3-1.jpg"--}}
-{{--                                 alt="Card image cap">--}}
-{{--                            <div class="card-body">--}}
-{{--                                <div class="d-flex">--}}
-{{--                                    <div class="avatar">--}}
-{{--                                        <img src="{{ Storage::url('public/profile/') . Auth::user()->profile_url }}"--}}
-{{--                                             alt="..." class="avatar-img rounded-circle">--}}
-{{--                                    </div>--}}
-{{--                                    <div class="info-post ml-2">--}}
-{{--                                        <p class="username">{{ Auth::user()->name }}</p>--}}
-{{--                                        <p class="date text-muted">20 Jan 18</p>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="separator-solid"></div>--}}
-{{--                                <h3 class="card-title" id="previewName">--}}
-{{--                                    <a href="#">--}}
-{{--                                        Judul Berita Anda Ditampilkan Disini--}}
-{{--                                    </a>--}}
-{{--                                </h3>--}}
-{{--                                <p class="card-text">Some quick example text to build on the card title and make up--}}
-{{--                                    the bulk--}}
-{{--                                    of the card's content.</p>--}}
-{{--                                <a href="#" class="btn btn-primary btn-rounded btn-sm">Read More</a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                <table class="table  w-100">
+                    <thead class="thead">
+                        <tr>
+                            <th>No</th>
+                            <th>Merk</th>
+                            <th>Nopol</th>
+                            <th>Nomor Mesin</th>
+                            <th>Kapasitas</th>
+                            <th>Berat Maximum</th>
+                            <th>Tanggal Input</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="row"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td scope="row"></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
 
-{{--                    <div class="col-lg-4 col-md-12">--}}
-{{--                        <div class="card card-post card-round">--}}
-{{--                            <img class="card-img-top" id="imgPreview"--}}
-{{--                                 src="https://images.bisnis-cdn.com/posts/2020/01/20/1191916/antarafoto-harga-tbs-kelapa-sawit-mulai-membaik-071219-syf-3-1.jpg"--}}
-{{--                                 alt="Card image cap">--}}
-{{--                            <div class="card-body">--}}
-{{--                                <div class="d-flex">--}}
-{{--                                    <div class="avatar">--}}
-{{--                                        <img src="{{ Storage::url('public/profile/') . Auth::user()->profile_url }}"--}}
-{{--                                             alt="..." class="avatar-img rounded-circle">--}}
-{{--                                    </div>--}}
-{{--                                    <div class="info-post ml-2">--}}
-{{--                                        <p class="username">{{ Auth::user()->name }}</p>--}}
-{{--                                        <p class="date text-muted">20 Jan 18</p>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="separator-solid"></div>--}}
-{{--                                <h3 class="card-title" id="previewName">--}}
-{{--                                    <a href="#">--}}
-{{--                                        Judul Berita Anda Ditampilkan Disini--}}
-{{--                                    </a>--}}
-{{--                                </h3>--}}
-{{--                                <p class="card-text">Some quick example text to build on the card title and make up--}}
-{{--                                    the bulk--}}
-{{--                                    of the card's content.</p>--}}
-{{--                                <a href="#" class="btn btn-primary btn-rounded btn-sm">Read More</a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
+
 
 
             </div>
@@ -166,26 +131,100 @@
             })
         });
 
-        window.onload = function () {
-            CKEDITOR.replace('content', {
-                filebrowserImageBrowseUrl: '/filemanager?type=Images',
-                filebrowserImageUploadUrl: '/filemanager/upload?type=Images&_token=',
-                filebrowserBrowseUrl: '/filemanager?type=Files',
-                filebrowserUploadUrl: '/filemanager/upload?type=Files&_token='
-            })
+        $(function() {
+            $('#dataTable').DataTable({
+                serverSide: false,
+                dom: 'lrtipB',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                ],
 
-            // jQuery and everything else is loaded
-            var el = document.getElementById('input-image');
-            el.onchange = function () {
-                var fileReader = new FileReader();
-                fileReader.readAsDataURL(document.getElementById("input-image").files[0])
-                fileReader.onload = function (oFREvent) {
-                    document.getElementById("imgPreview").src = oFREvent.target.result;
-                };
-            }
+                "ajax": {
+                    url: "{{ url('/ticket/fetchAll') }}",
+                    type: "GET",
+                    dataSrc: "ticket",
+                    beforeSend: function() {
+                        $('#loader').show();
+                    },
+                    complete: function() {
+                        $('#loader').hide();
+                    },
+                },
+                "columns": [{
+                        data: 'id'
+                    },
+                    {
+                        data: 'nid'
+                    },
+                    {
+                        data: 'name'
+                    },
+                    {
+                        data: 'faculty'
+                    },
+                    {
+                        data: 'class'
+                    },
+                    {
+                        render: function(datum, type, row) {
+                            switch (row.account_type) {
+                                case "1":
+                                    return "Mentor"
+                                    break;
+                                case "2":
+                                    return "Mentee"
+                                    break;
+                                case "3":
+                                    return "Dosen"
+                                    break;
+                                case "Pengurus":
+                                    return "Dosen"
+                                    break;
+                                default:
+                                    return "Unknown Account Type"
+                                    break;
+                            }
 
+                        }
+                    },
+                    {
+                        render: function(datum, type, row) {
+                            switch (row.status) {
+                                case "0": //Dalam Antrian
+                                    return "<span class='badge badge-info'>Status : Dalam Antrian</span>"
+                                    break;
+                                case "1": //Selesai
+                                    return "<span class='badge badge-success'>Status : Selesai</span>"
+                                    break;
+                                case "2": //Gagal
+                                    return "<span class='badge badge-danger'>Status : Gagal</span>"
+                                    break;
+                                case "3": //Diproses
+                                    return "<span class='badge badge-warning'>Status : Diproses</span>"
+                                    break;
+                                default:
+                                    return "Unknown Account Type"
+                                    break;
+                            }
+                        }
+                    },
+                    {
+                        data: 'ticket_type'
+                    },
+                    {
+                        render: function(datum, type, row) {
+                            let html =
+                                "<button type='button' id='" + row.id +
+                                "' class='btn btn-primary btn-xs edit_data' data-toggle='modal' data-target='#ajaxModel'>Lihat Detail </button>";
+                            return html;
+                        }
+                    },
+                ]
+            });
+        });
 
-        }
     </script>
 
 
